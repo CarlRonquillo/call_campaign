@@ -7,6 +7,7 @@
 			$this->db->from('orders');
 			$this->db->join('users', 'users.ID = orders.callerID','left');
 			$this->db->order_by('orders.ID', 'DESC');
+			$this->db->where("orders.campaign",date('Y'));
 			$query = $this->db->get();
 			return $query->result();
 		}
