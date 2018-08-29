@@ -23,8 +23,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-//$config['base_url'] = 'http://campaign.ncmmanila.org/';
-$config['base_url'] = 'http://localhost/campaign/';
+$config['base_url'] = 'http://campaign.ncmmanila.org/';
+//$config['base_url'] = 'http://localhost/campaign/';
 /*
 |--------------------------------------------------------------------------
 | Index File
