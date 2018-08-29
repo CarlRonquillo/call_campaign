@@ -4,7 +4,7 @@
 		<div class="row justify-content-md-center">
 			<div class="card" style="width: 35rem;">
 			    <div class="card-header text-center bg-amber white-text">
-			        2017 December Campaign Order Form
+			        2018 December Campaign Order Form
 			    </div>
 			    <div class="card-body">
 			    	<?php 
@@ -307,7 +307,7 @@
 						</div><br><br>
 
 					    <div class="text-center">
-					        <button type="submit" id="submit" name="submit" class="btn bg-amber">Submit</button>
+					        <button type="submit" id="submit" class="btn bg-amber">Submit</button>
 					    </div>
 					</form>
 

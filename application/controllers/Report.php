@@ -264,6 +264,7 @@ class Report extends CI_Controller {
 
 			$data['Closed'] = 0;
 			$data['CallerID'] = $this->session->userdata('ID');
+			$data['Campaign'] = date('Y');
 
 			if(isset($data['Network']))
 			{
@@ -347,11 +348,11 @@ class Report extends CI_Controller {
 				$ncm_full_array["element_8"] = $this->input->post('Comments');
 				$ncm_full_array["element_11_1"] = $this->input->post('Network');
 
-				$ncm_full_array["form_id"] = 23;
+				$ncm_full_array["form_id"] = 25;
 				$ncm_full_array["submit"] = "Submit";
 				$ncm_full_array["element_10"] = $this->session->userdata('ID');
 
-				$url = 'http://fulfillment.ncm.org/view.php?id=23';
+				$url = 'http://fulfillment.ncm.org/view.php?id=25';
 
 				$options['http'] = array(
 					'method' => "POST",
@@ -363,25 +364,43 @@ class Report extends CI_Controller {
 
 				if($body)
 				{
-					$this->session->set_flashdata('response','Record successfully saved.');
+					$this->load->model('ReportModel');
+					$data = $this->input->post();
 
-					//$arr['success'] = true;
+					$data['Closed'] = 1;
+					$data['CallerID'] = $this->session->userdata('ID');
+					$data['Campaign'] = date('Y');
 
-			        /*$records = $this->ReportModel->getRecord($this->db->insert_id());
+					if(isset($data['Network']))
+					{
+						$data['Network'] = 1;
+					}
+					else
+					{
+						$data['Network'] = 0;
+					}
 
-			        $arr['FirstName'] = $records->FirstName;
-			        $arr['LastName'] = $records->LastName;
-			        $arr['State'] = $records->State;
-			        $arr['PhoneNo'] = $records->PhoneNo;
-			        $arr['Email'] = $records->Email;
-			        $arr['DateOrdered'] = $records->DateOrdered;
-			        $arr['DVD'] = $records->DVD;
-			        $arr['Catalog'] = $records->Catalog;
-			        $arr['Brochure'] = $records->Brochure;
-			        $arr['Envelope'] = $records->Envelope;
-			        $arr['Name'] = $records->Name;
-			       	$arr['Completed'] = $records->Completed;
-			        $arr['Closed'] = $records->Closed;*/
+		        	if($this->ReportModel->saveRecord($data,'orders'))
+			        {
+			            $this->session->set_flashdata('response','Record successfully saved.');
+			            /*$arr['success'] = true;
+
+			            $records = $this->ReportModel->getRecord($this->db->insert_id());
+
+			            $arr['FirstName'] = $records->FirstName;
+			            $arr['LastName'] = $records->LastName;
+			            $arr['State'] = $records->State;
+			            $arr['PhoneNo'] = $records->PhoneNo;
+			            $arr['Email'] = $records->Email;
+			            $arr['DateOrdered'] = $records->DateOrdered;
+			            $arr['DVD'] = $records->DVD;
+			            $arr['Catalog'] = $records->Catalog;
+			            $arr['Brochure'] = $records->Brochure;
+			            $arr['Envelope'] = $records->Envelope;
+			            $arr['Name'] = $records->Name;
+			            $arr['Completed'] = $records->Completed;
+			            $arr['Closed'] = $records->Closed;*/
+			        }
 				}
 				else
 				{

@@ -31,6 +31,7 @@
 			{
 				$this->db->where("orders.CallerID",$caller);
 			}
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->order_by('orders.ID', 'DESC');
 			$query = $this->db->get();
 			return $query->result();
@@ -103,6 +104,7 @@
 			$this->db->join('orders', 'users.ID = orders.callerID');
 			$this->db->where('orders.DateOrdered >=', date('Y-m-d'));
 			$this->db->where('orders.DateOrdered <=', $toPlus1Day);
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->group_by('users.ID');
 			$this->db->order_by('ClosedCount','DESC');
 			$query = $this->db->get();
@@ -135,6 +137,7 @@
 				$this->db->where('orders.DateOrdered >=', $from);
 				$this->db->where('orders.DateOrdered <=', $toPlus1Day);
 			}
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->group_by('users.ID');
 			$this->db->order_by('ClosedCount','DESC');
 			$query = $this->db->get();
@@ -147,6 +150,7 @@
 			$this->db->from('orders');
 			$this->db->join('users', 'users.ID = orders.callerID','left');
 			$this->db->where('DateOrdered > ',$lastCheck);
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->order_by('orders.DateOrdered', 'DESC');
 			$query = $this->db->get();
 			return $query->result();
@@ -162,6 +166,7 @@
 			$this->db->from('orders');
 			$this->db->join('users', 'users.ID = orders.callerID','inner');
 			$this->db->where('DateOrdered > ',$lastCheck);
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->group_by('orders.CallerID');
 			$query = $this->db->get();
 			return $query->result();
@@ -179,6 +184,7 @@
 					        SUM(Network) as Network,
        						CONCAT(Round((sum(Closed)/sum(Completed)) * 100),"%") as percentage');
 			$this->db->from('orders');
+			$this->db->where("orders.campaign",date('Y'));
 			$query = $this->db->get();
 			return $query->result();
 		}
@@ -195,6 +201,7 @@
 			$this->db->select('orders.*,users.Name');
 			$this->db->from('orders');
 			$this->db->join('users', 'users.ID = orders.callerID','left');
+			$this->db->where("orders.campaign",date('Y'));
 			$this->db->where('orders.ID',$id);
 			$this->db->order_by('orders.ID', 'DESC');
 			$query = $this->db->get();
