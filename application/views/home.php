@@ -310,7 +310,7 @@
 				var datetime = newDate.today() + " " + newDate.timeNow();*/
 
 				var lastcheck = "<?php echo $dateTime ?>"; 
-				alert(lastcheck);
+				//alert(lastcheck);
 			    setInterval(function() {
 			        $.ajax({
 			            url:    "<?php echo base_url('index.php/report/get_latestrecord');?>", 
